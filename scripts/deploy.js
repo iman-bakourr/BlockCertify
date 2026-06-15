@@ -4,7 +4,7 @@ const path = require("path");
 
 async function main() {
   const BlockCertify = await hre.ethers.getContractFactory("BlockCertify");
-  const BlockCertify = await blockCertify.deploy();
+  const blockCertify = await BlockCertify.deploy();
   await blockCertify.waitForDeployment();
 
   const address = await blockCertify.getAddress();

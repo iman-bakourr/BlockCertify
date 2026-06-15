@@ -125,6 +125,39 @@ router.post("/certificates", async (req, res) => {
 });
 
 /**
+ * POST /api/university/certificates/record
+ * Saves off-chain metadata for a certificate already issued via MetaMask.
+ * The contract write was done by the frontend — this just persists the metadata.
+ *
+ * Body: { studentName, studentId, courseName, degreeType, graduationDate, university, gpa, issuedBy, certHash, txHash }
+ */
+router.post("/certificates/record", (req, res) => {
+  try {
+    const { studentName, studentId, courseName, degreeType, graduationDate, university, gpa, issuedBy, certHash, txHash } = req.body;
+    if (!studentName || !studentId || !courseName || !certHash) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+    const record = {
+      studentName,
+      studentId,
+      courseName,
+      degreeType: degreeType || "",
+      university: university || "",
+      gpa: gpa || null,
+      issuedBy: issuedBy || "",
+      dateIssued: graduationDate || new Date().toISOString().split("T")[0],
+      certHash,
+      txHash: txHash || "",
+    };
+    db.saveCertificate(certHash, record);
+    db.addAuditEntry("METAMASK_CERT_RECORDED", { certHash, studentId });
+    res.status(201).json({ success: true, certificate: record });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
  * GET /api/university/certificates
  * Returns the list of all issued certificates ("View All" tab).
  */

@@ -94,12 +94,16 @@ export default function UniversityDashboard() {
       if (!account) await connectWallet();
       const payload = { ...form, graduationDate: form.graduationDate || today() };
       const onChain = await issueCertificateOnChain(payload);
+      // Save off-chain metadata so Student/Employer portals can find it
+      await api.recordMetaMaskCertificate({ ...payload, certHash: onChain.certHash, txHash: onChain.txHash }).catch(() => {});
       setResult({
         success: true,
         message: `Certificate issued on-chain via MetaMask (tx ${onChain.txHash.slice(0, 10)}…)`,
         certHash: onChain.certHash,
       });
       resetFormKeepResult();
+      loadDashboard();
+      loadCertificates();
     } catch (err) {
       setResult({ success: false, message: err.message });
     } finally {

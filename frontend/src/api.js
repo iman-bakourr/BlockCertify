@@ -21,6 +21,8 @@ export const api = {
   getDashboard: () => request("/university/dashboard"),
   issueCertificate: (payload) =>
     request("/university/certificates", { method: "POST", body: JSON.stringify(payload) }),
+  recordMetaMaskCertificate: (payload) =>
+    request("/university/certificates/record", { method: "POST", body: JSON.stringify(payload) }),
   getAllCertificates: () => request("/university/certificates"),
 
   // Student

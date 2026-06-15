@@ -9,7 +9,7 @@ const path = require("path");
  *  2. CONTRACT_ADDRESS env var + bundled ABI fallback below
  */
 function loadContractInfo() {
-  const deploymentPath = path.join(__dirname, "..", "..", "deployments", "BlockCertify.json");
+  const deploymentPath = path.join(__dirname, "..", "deployments", "BlockCertify.json");
 
   if (fs.existsSync(deploymentPath)) {
     const data = JSON.parse(fs.readFileSync(deploymentPath, "utf-8"));
