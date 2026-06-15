@@ -2,21 +2,21 @@ const fs = require("fs");
 const path = require("path");
 
 /**
- * Loads the CertiChain contract ABI + address.
+ * Loads the BlockCertify contract ABI + address.
  *
  * Priority:
- *  1. ../deployments/CertiChain.json  (written by scripts/deploy.js)
+ *  1. ../deployments/BlockCertify.json  (written by scripts/deploy.js)
  *  2. CONTRACT_ADDRESS env var + bundled ABI fallback below
  */
 function loadContractInfo() {
-  const deploymentPath = path.join(__dirname, "..", "..", "deployments", "CertiChain.json");
+  const deploymentPath = path.join(__dirname, "..", "..", "deployments", "BlockCertify.json");
 
   if (fs.existsSync(deploymentPath)) {
     const data = JSON.parse(fs.readFileSync(deploymentPath, "utf-8"));
     return { address: data.address, abi: data.abi };
   }
 
-  // Fallback minimal ABI (kept in sync with contracts/CertiChain.sol)
+  // Fallback minimal ABI (kept in sync with contracts/BlockCertify.sol)
   const abi = [
     "function owner() view returns (address)",
     "function authorizedIssuers(address) view returns (bool)",

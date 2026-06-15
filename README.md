@@ -1,4 +1,4 @@
-# CertiChain — Blockchain-Based Academic Certificate Verification System
+# BlockCertify — Blockchain-Based Academic Certificate Verification System
 Blockchain-Based Academic Certificate Verification System
 
 ## Team Members

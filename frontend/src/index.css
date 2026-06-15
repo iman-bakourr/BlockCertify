@@ -15,7 +15,7 @@
   --employer-violet-soft: #ece4f7;
 
   /* --- Type --- */
-  --font-display: "Source Serif 4", "Georgia", serif;
+  --font-display: "Inter", "Helvetica Neue", Arial, sans-serif;
   --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
   --font-mono: "IBM Plex Mono", "Courier New", monospace;
 }

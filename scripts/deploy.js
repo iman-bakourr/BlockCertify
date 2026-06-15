@@ -3,21 +3,21 @@ const fs = require("fs");
 const path = require("path");
 
 async function main() {
-  const CertiChain = await hre.ethers.getContractFactory("CertiChain");
-  const certiChain = await CertiChain.deploy();
-  await certiChain.waitForDeployment();
+  const BlockCertify = await hre.ethers.getContractFactory("BlockCertify");
+  const BlockCertify = await blockCertify.deploy();
+  await blockCertify.waitForDeployment();
 
-  const address = await certiChain.getAddress();
-  console.log("CertiChain deployed to:", address);
+  const address = await blockCertify.getAddress();
+  console.log("BlockCertify deployed to:", address);
 
   // Save the address + ABI so the backend and frontend can pick it up.
-  const artifact = await hre.artifacts.readArtifact("CertiChain");
+  const artifact = await hre.artifacts.readArtifact("BlockCertify");
 
   const outDir = path.join(__dirname, "..", "deployments");
   if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 
   fs.writeFileSync(
-    path.join(outDir, "CertiChain.json"),
+    path.join(outDir, "BlockCertify.json"),
     JSON.stringify(
       {
         address,
@@ -30,7 +30,7 @@ async function main() {
     )
   );
 
-  console.log(`Deployment info written to deployments/CertiChain.json`);
+  console.log(`Deployment info written to deployments/BlockCertify.json`);
 }
 
 main().catch((error) => {

@@ -32,7 +32,7 @@ app.use("/api/employer", employerRoutes);
 app.get("/api/status", async (req, res) => {
   const status = await blockchain.getBlockchainStatus();
   res.json({
-    service: "CertiChain Backend",
+    service: "BlockCertify Backend",
     status: "running",
     blockchain: status,
   });
@@ -45,5 +45,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`CertiChain backend running on http://localhost:${PORT}`);
+  console.log(`BlockCertify backend running on http://localhost:${PORT}`);
 });

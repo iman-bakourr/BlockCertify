@@ -11,8 +11,8 @@ export default function App() {
     <div className="app-shell">
       <header className="topbar">
         <Link to="/" className="brand">
-          <span className="brand-mark">CC</span>
-          CertiChain
+          <span className="brand-mark">BC</span>
+          BlockCertify
         </Link>
         <nav className="topbar-links">
           <Link to="/university/login">University</Link>
@@ -31,7 +31,7 @@ export default function App() {
       </Routes>
 
       <footer className="site-footer">
-        CertiChain — Secure, Immutable, and Verifiable Academic Certificates · CSCI 4312 Blockchain and Application
+        BlockCertify — Secure, Immutable, and Verifiable Academic Certificates on the Blockchain.
       </footer>
     </div>
   );

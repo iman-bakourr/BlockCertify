@@ -15,7 +15,7 @@ export default function UniversityLogin() {
     setLoading(true);
     try {
       await api.universityLogin(email, password);
-      sessionStorage.setItem("certichain_role", "university");
+      sessionStorage.setItem("blockcertify_role", "university");
       navigate("/university/dashboard");
     } catch (err) {
       setError(err.message);

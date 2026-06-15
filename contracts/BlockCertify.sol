@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 /**
- * @title CertiChain
+ * @title BlockCertify
  * @notice Blockchain-based academic certificate verification system.
  *
  * Security notes (per Milestone 1-2 of the assignment):
@@ -18,7 +18,7 @@ pragma solidity ^0.8.20;
  *  - Once stored, certificate data cannot be edited or deleted
  *    (Blockchain Immutability Enforcement, section 3.2e).
  */
-contract CertiChain {
+contract BlockCertify {
     address public owner;
 
     // --- Threshold mechanism: limit verification attempts (section 3.1a) ---
@@ -72,14 +72,14 @@ contract CertiChain {
 
     // --- Modifiers (Access Control) ---
     modifier onlyOwner() {
-        require(msg.sender == owner, "CertiChain: caller is not the owner");
+        require(msg.sender == owner, "BlockCertify: caller is not the owner");
         _;
     }
 
     modifier onlyAuthorizedIssuer() {
         if (!authorizedIssuers[msg.sender]) {
             emit UnauthorizedAccessAlert(msg.sender, "issueCertificate");
-            revert("CertiChain: caller is not an authorized university admin");
+            revert("BlockCertify: caller is not an authorized university admin");
         }
         _;
     }
@@ -98,7 +98,7 @@ contract CertiChain {
     /// @notice Grants university admin rights to a new address.
     function authorizeIssuer(address _issuer) external onlyOwner {
         // Checks
-        require(_issuer != address(0), "CertiChain: zero address");
+        require(_issuer != address(0), "BlockCertify: zero address");
         // Effects
         authorizedIssuers[_issuer] = true;
         // Interaction
@@ -107,7 +107,7 @@ contract CertiChain {
 
     /// @notice Revokes university admin rights from an address.
     function revokeIssuer(address _issuer) external onlyOwner {
-        require(authorizedIssuers[_issuer], "CertiChain: not an issuer");
+        require(authorizedIssuers[_issuer], "BlockCertify: not an issuer");
         authorizedIssuers[_issuer] = false;
         emit IssuerRevoked(_issuer);
     }
@@ -136,9 +136,9 @@ contract CertiChain {
         bytes32 _certHash
     ) external onlyAuthorizedIssuer {
         // --- Checks ---
-        require(_certHash != bytes32(0), "CertiChain: invalid hash");
-        require(!certificates[_certHash].exists, "CertiChain: certificate already exists");
-        require(bytes(_studentId).length > 0, "CertiChain: studentId required");
+        require(_certHash != bytes32(0), "BlockCertify: invalid hash");
+        require(!certificates[_certHash].exists, "BlockCertify: certificate already exists");
+        require(bytes(_studentId).length > 0, "BlockCertify: studentId required");
 
         // --- Effects ---
         certificates[_certHash] = Certificate({
@@ -176,7 +176,7 @@ contract CertiChain {
         }
         require(
             verificationCount[msg.sender] < MAX_VERIFICATIONS_PER_WINDOW,
-            "CertiChain: verification limit exceeded, try again later"
+            "BlockCertify: verification limit exceeded, try again later"
         );
 
         // --- Effects ---

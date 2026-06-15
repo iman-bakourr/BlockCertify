@@ -11,7 +11,7 @@ export default function StudentPortal() {
   const [copiedHash, setCopiedHash] = useState(null);
 
   useEffect(() => {
-    if (sessionStorage.getItem("certichain_role") !== "student") {
+    if (sessionStorage.getItem("blockcertify_role") !== "student") {
       navigate("/student/login");
     }
   }, [navigate]);
@@ -56,7 +56,7 @@ export default function StudentPortal() {
   }
 
   function handleLogout() {
-    sessionStorage.removeItem("certichain_role");
+    sessionStorage.removeItem("blockcertify_role");
     navigate("/");
   }
 

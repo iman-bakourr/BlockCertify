@@ -15,7 +15,7 @@ export default function StudentLogin() {
     setLoading(true);
     try {
       await api.studentLogin(email, password);
-      sessionStorage.setItem("certichain_role", "student");
+      sessionStorage.setItem("blockcertify_role", "student");
       navigate("/student/portal");
     } catch (err) {
       setError(err.message);

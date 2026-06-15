@@ -1,7 +1,7 @@
 {
-  "name": "certichain-backend",
+  "name": "blockcertify-backend",
   "version": "1.0.0",
-  "description": "CertiChain backend - bridges the web app frontend with the CertiChain smart contract",
+  "description": "BlockCertify backend - bridges the web app frontend with the BlockCertify smart contract",
   "main": "server.js",
   "type": "commonjs",
   "scripts": {

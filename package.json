@@ -1,7 +1,7 @@
 {
-  "name": "certichain-contracts",
+  "name": "blockcertify-contracts",
   "version": "1.0.0",
-  "description": "CertiChain - Blockchain-based Academic Certificate Verification System (Smart Contracts)",
+  "description": "BlockCertify - Blockchain-based Academic Certificate Verification System (Smart Contracts)",
   "scripts": {
     "compile": "hardhat compile",
     "test": "hardhat test",

@@ -27,7 +27,7 @@ export default function UniversityDashboard() {
   const { account, connecting, error: web3Error, connectWallet, issueCertificateOnChain } = useWeb3();
 
   useEffect(() => {
-    if (sessionStorage.getItem("certichain_role") !== "university") {
+    if (sessionStorage.getItem("blockcertify_role") !== "university") {
       navigate("/university/login");
       return;
     }
@@ -108,7 +108,7 @@ export default function UniversityDashboard() {
   }
 
   function handleLogout() {
-    sessionStorage.removeItem("certichain_role");
+    sessionStorage.removeItem("blockcertify_role");
     navigate("/");
   }
 
