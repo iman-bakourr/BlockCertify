@@ -9,6 +9,7 @@ export default function StudentPortal() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [copiedHash, setCopiedHash] = useState(null);
+  const [selectedCert, setSelectedCert] = useState(null);
 
   useEffect(() => {
     if (sessionStorage.getItem("blockcertify_role") !== "student") {
@@ -21,6 +22,7 @@ export default function StudentPortal() {
     if (!studentId.trim()) return;
     setLoading(true);
     setError(null);
+    setSelectedCert(null);
     try {
       const data = await api.getStudentCertificates(studentId.trim());
       setCertificates(data.certificates || []);
@@ -133,7 +135,7 @@ export default function StudentPortal() {
               </thead>
               <tbody>
                 {certificates.map((c) => (
-                  <tr key={c.certHash}>
+                  <tr key={c.certHash} style={{ background: selectedCert?.certHash === c.certHash ? "var(--color-surface-2, #f3f0ff)" : undefined }}>
                     <td>{c.courseName}</td>
                     <td>{c.degreeType}</td>
                     <td>{c.university}</td>
@@ -144,6 +146,9 @@ export default function StudentPortal() {
                       </span>
                     </td>
                     <td style={{ display: "flex", gap: "0.4rem" }}>
+                      <button className="muted-link" onClick={() => setSelectedCert(selectedCert?.certHash === c.certHash ? null : c)}>
+                        {selectedCert?.certHash === c.certHash ? "Hide" : "View"}
+                      </button>
                       <button className="muted-link" onClick={() => handleDownload(c)}>
                         Download
                       </button>
@@ -159,6 +164,36 @@ export default function StudentPortal() {
               </tbody>
             </table>
           </div>
+
+          {selectedCert && (
+            <div className="verify-result valid" style={{ marginTop: "1.5rem" }}>
+              <div className="verify-result-title">✅ Certificate Details</div>
+              <dl className="cert-detail-grid">
+                <div><dt>Student Name</dt><dd>{selectedCert.studentName}</dd></div>
+                <div><dt>Student ID</dt><dd>{selectedCert.studentId}</dd></div>
+                <div><dt>Course</dt><dd>{selectedCert.courseName}</dd></div>
+                <div><dt>Degree</dt><dd>{selectedCert.degreeType}</dd></div>
+                <div><dt>University</dt><dd>{selectedCert.university}</dd></div>
+                <div><dt>Issued By</dt><dd>{selectedCert.issuedBy}</dd></div>
+                <div><dt>Date Issued</dt><dd>{selectedCert.dateIssued}</dd></div>
+                {selectedCert.gpa && <div><dt>GPA</dt><dd>{selectedCert.gpa}</dd></div>}
+              </dl>
+              <div style={{ marginTop: "0.75rem" }}>
+                <span className="hash-pill">{selectedCert.certHash}</span>
+              </div>
+              <div style={{ marginTop: "0.75rem", display: "flex", gap: "0.5rem" }}>
+                <button className="btn btn-ghost" onClick={() => handleCopyHash(selectedCert.certHash)}>
+                  {copiedHash === selectedCert.certHash ? "Copied!" : "Copy Hash"}
+                </button>
+                <button className="btn btn-ghost" onClick={() => handleCopyLink(selectedCert.certHash)}>
+                  {copiedHash === selectedCert.certHash + "-link" ? "Copied!" : "Copy Verification Link"}
+                </button>
+                <button className="btn btn-ghost" onClick={() => handleDownload(selectedCert)}>
+                  Download JSON
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </main>
