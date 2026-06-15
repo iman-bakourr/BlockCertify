@@ -1,8 +1,12 @@
 # CertiChain — Blockchain-Based Academic Certificate Verification System
+Blockchain-Based Academic Certificate Verification System
 
-Implementation for Project Part 2 of CSCI 4312 (Blockchain and Application).
-Matches the architecture, use cases, and UI mockups (Figures 3–8) from the
-Project Proposal.
+## Team Members
+- BAKOUR IMAN
+- ALIN FARHAIN BINTI ABDUL RAJAT @ ABDUL RAZAK
+- AMYSHA QISTINA BINTI AMEROLAZUAM 
+- SHARIFAH SHERIL DAMIA BINTI SYED IZZUDDIN
+- SHARIFAH ZAHIDAH BINTI SYED ABDUL RAHMAN
 
 ## Structure
 
