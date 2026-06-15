@@ -11,9 +11,9 @@ Blockchain-Based Academic Certificate Verification System
 ## Structure
 
 ```
-certichain/
-├── contracts/CertiChain.sol     # Solidity smart contract (CEI pattern)
-├── test/CertiChain.test.js      # Hardhat tests
+BlockCertify/
+├── contracts/BlockCertify.sol     # Solidity smart contract (CEI pattern)
+├── test/BlockCertify.test.js      # Hardhat tests
 ├── scripts/deploy.js            # Deployment script
 ├── hardhat.config.js
 ├── package.json                 # Hardhat / contracts dependencies
@@ -43,7 +43,6 @@ certichain/
 ## 1. Smart contract (Hardhat)
 
 ```bash
-cd certichain
 npm install
 npx hardhat compile
 npx hardhat test
@@ -55,7 +54,7 @@ npx hardhat node
 npm run deploy:local
 ```
 
-This writes `deployments/CertiChain.json` containing the deployed address and ABI,
+This writes `deployments/BlockCertify.json` containing the deployed address and ABI,
 used by both the backend and frontend.
 
 ## 2. Backend
@@ -67,7 +66,7 @@ cp .env.example .env
 # Edit .env:
 #  - RPC_URL=http://127.0.0.1:8545 (from `npx hardhat node`)
 #  - PRIVATE_KEY=<one of the test account keys printed by hardhat node>
-#  - CONTRACT_ADDRESS=<address from deployments/CertiChain.json>
+#  - CONTRACT_ADDRESS=<address from deployments/BlockCertify.json>
 npm run dev
 ```
 
@@ -96,7 +95,7 @@ Open `http://localhost:5173`. Three entry points match the proposal:
 
 ## Security notes (per Milestones 1–2 of the assignment)
 
-- `CertiChain.sol` follows the **Checks-Effects-Interactions (CEI)** pattern in
+- `BlockCertify.sol` follows the **Checks-Effects-Interactions (CEI)** pattern in
   every state-changing function.
 - Only addresses in `authorizedIssuers` can call `issueCertificate` (Certificate
   Upload Validation).
